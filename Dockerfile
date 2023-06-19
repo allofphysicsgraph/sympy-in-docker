@@ -14,6 +14,11 @@ RUN apt install -y python3 python3-pip pipx
 
 # https://pypi.org/project/sympy/
 # the following works but then sympy isn't available for import
-RUN pipx install sympy
+#RUN pipx install sympy
+
+# necessary for the command "sympy.srepr(parse_latex('f(x)'))"
+RUN pipx install antlr4-python3-runtime
 
 RUN apt install -y python3-sympy
+
+

@@ -1,6 +1,6 @@
 # Lean in Docker
 
-Assuming your have `docker` (or `podman`) and `make` installed, to build this container run
+Assuming your have `docker` (or, after som editing, `podman`) and `make` installed, to build this container run
 ```bash
 make
 ```
