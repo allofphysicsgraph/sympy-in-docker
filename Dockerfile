@@ -3,7 +3,19 @@ FROM ubuntu:23.04
 WORKDIR /opt/
 
 RUN apt -y update && apt upgrade
-RUN apt install -y python3 python3-pip pipx
+RUN apt install -y python3 \
+  python3-pip \
+  pipx \
+  curl \
+  rsync \
+  openjdk-17-jdk
+
+RUN curl -O https://www.antlr.org/download/antlr-4.11.0-complete.jar
+
+RUN rsync -axr antlr-4.11.0-complete.jar /usr/local/lib/ --progress
+
+COPY antlr4_updatebashrc.sh /opt/
+RUN /bin/bash antlr4_updatebashrc.sh
 
 # With pipx when you install things they go into isolated environments. With pip you're just installing things globally.
 
