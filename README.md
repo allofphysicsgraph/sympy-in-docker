@@ -1,4 +1,4 @@
-# Lean in Docker
+# SymPy in Docker
 
 Assuming your have `docker` (or, after some editing, `podman`) and `make` installed, to build this container run
 ```bash
