@@ -31,3 +31,12 @@ sympy: 1.12
 Eq(a, b)
 ```
 
+Assuming you've copied `examples_of_valid_latex` into the local directory,
+```bash
+for filename in examples_of_valid_latex/expr*.tex; do 
+  docker run -it --rm -v `pwd`:/scratch --workdir /scratch sympyonubuntu python3 eval_latex.py $filename
+done
+```
+That folder is found in <https://github.com/allofphysicsgraph/latex-example-expressions/tree/master/examples_of_valid_latex>
+
+
