@@ -12,4 +12,6 @@ docker_run:
              --user $(id -u):$(id -g) \
              $(IMAGE_NAME) /bin/bash 
 
-
+grammarinator:
+	apt install git
+	git clone https://github.com/renatahodovan/grammarinator

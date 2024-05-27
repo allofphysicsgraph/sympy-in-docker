@@ -28,5 +28,5 @@ RUN apt install -y python3 python3-pip
 
 # necessary for the command "sympy.srepr(parse_latex('f(x)'))"
 RUN pip install antlr4-python3-runtime==4.11 sympy
-
+COPY Makefile /opt/
 
