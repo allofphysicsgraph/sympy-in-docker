@@ -91,11 +91,11 @@ SCIENTIFIC_NUMBER
     ;
 
 fragment NUMBER
-    : ('0' .. '9')+ ('.' ('0' .. '9')+)?
+    : UNSIGNED_INTEGER ('.' UNSIGNED_INTEGER )?
     ;
 
 fragment UNSIGNED_INTEGER
-    : ('0' .. '9')+
+    : '0'|('1' .. '9')('0' .. '9')*
     ;
 
 fragment E
