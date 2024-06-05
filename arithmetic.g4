@@ -54,6 +54,7 @@ expression
 atom
     : scientific
     | int
+    | float
     | variable
     ;
 
@@ -90,10 +91,20 @@ fragment VALID_ID_CHAR
     | '0' .. '9'
     ;
 
+float
+    : FLOAT
+    ;
+
 //The NUMBER part gets its potential sign from "(PLUS | MINUS)* atom" in the expression rule
 SCIENTIFIC_NUMBER
     : NUMBER (E SIGN? UNSIGNED_INTEGER)
     ;
+
+
+FLOAT
+    : UNSIGNED_INTEGER? ('.' UNSIGNED_INTEGER )
+    ;
+
 
 fragment NUMBER
     : UNSIGNED_INTEGER ('.' UNSIGNED_INTEGER )?
