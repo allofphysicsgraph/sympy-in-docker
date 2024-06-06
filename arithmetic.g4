@@ -41,6 +41,8 @@ file_
 
 equation
     : expression relop expression
+    | '\\begin{verbatim}' equation '\\end{verbatim}'
+    | '\\begin{equation}' equation '\\end{equation}'
     ;
 
 expression
@@ -48,6 +50,7 @@ expression
     | expression (TIMES | DIV) expression
     | expression (PLUS | MINUS) expression
     | LPAREN expression RPAREN
+    | LPAREN expression (COMMA expression)* RPAREN
     | (PLUS | MINUS)* atom
     ;
 
@@ -93,6 +96,15 @@ fragment VALID_ID_CHAR
 
 float
     : FLOAT
+    ;
+
+sympy_eq
+    : SYMPY_EQ
+    ;
+
+
+SYMPY_EQ
+    : Eq expression
     ;
 
 //The NUMBER part gets its potential sign from "(PLUS | MINUS)* atom" in the expression rule
@@ -166,6 +178,10 @@ POINT
 
 POW
     : '^'
+    ;
+
+COMMA
+    : ','
     ;
 
 WS

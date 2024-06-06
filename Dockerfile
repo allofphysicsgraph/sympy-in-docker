@@ -13,6 +13,7 @@ WORKDIR /opt/
 
 #RUN apt -y update && apt -y upgrade
 RUN apt -y update
+RUN apt install openjdk-23-jdk
 RUN apt install -y python3 python3-pip 
 
 # With pipx when you install things they go into isolated environments. With pip you're just installing things globally.
