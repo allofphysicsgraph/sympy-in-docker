@@ -1,2 +1,10 @@
 antlr-4.13.1-complete.jar
 grammarinator/
+*.tex
+*.interp
+*.tokens
+*.class
+*.java
+latex-example-expressions/
+grammars-v4/
+examples/
