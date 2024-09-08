@@ -98,14 +98,6 @@ float
     : FLOAT
     ;
 
-sympy_eq
-    : SYMPY_EQ
-    ;
-
-
-SYMPY_EQ
-    : Eq expression
-    ;
 
 //The NUMBER part gets its potential sign from "(PLUS | MINUS)* atom" in the expression rule
 SCIENTIFIC_NUMBER
