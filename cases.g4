@@ -1,4 +1,4 @@
-grammar latex;
+grammar cases;
 
 prog:   stat+ ; 
 
