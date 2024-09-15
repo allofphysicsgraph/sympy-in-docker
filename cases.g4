@@ -6,13 +6,15 @@ stat:   expr
     |   equation 
     ;
 
-expr:   expr MUL  expr   
+expr:
+       expr POW expr+   
+    |	expr MUL  expr   
     |   expr DIV  expr  
     |   expr ADD  expr  
     |   expr SUBTRACT  expr   
-    |   LPAREN expr RPAREN
-    |   LBRACE expr RPAREN
-    |   LBRACKET expr RBRACKET    
+    |   LPAREN expr+ RPAREN
+    |   LBRACE expr+ RBRACE
+    |   LBRACKET expr+ RBRACKET    
     |   BAR variable BAR
     |   variable
     |   int 
@@ -87,8 +89,13 @@ RPAREN: ')' ;
 SUBTRACT : '-' ;
 UNDERSCORE: '_';
 VARIABLE: 'x' | 'y' | 'z' | 'P' | 'r' |'j';
+BANG: '!';
+POW: '^';
 
-iint :
+factorial:
+	variable BANG
+	;
+int :
 	('-'|'+')* INT; 
 
 INT:   '0'|[1-9][0-9]*  ;        // match integers
