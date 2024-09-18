@@ -22,7 +22,9 @@ expr:
     |  inequality
     | conditional inequality 
     | '$' expr '$'
+    | '\\[' expr '\\]'
     | variable UNDERSCORE LBRACE expr RBRACE 
+    | factorial
 ;
 
 
@@ -31,6 +33,7 @@ inequality
 	;
 relop
 	: '\\geq'
+	| '\\ne'
 	| '>'
 	| '<' 
 	;
@@ -38,6 +41,8 @@ relop
 conditional:
 	'\\text' LBRACE 'if' RBRACE
 	| '\\text' LBRACE 'if' expr 'is odd' RBRACE COMMA LATEX_NEWLINE
+	| '\\text' LBRACE 'if' expr 'is even' RBRACE COMMA LATEX_NEWLINE
+	| '\\text' LBRACE 'if' expr 'is odd' RBRACE COMMA DOT
 	| '\\text' LBRACE 'if' expr 'is even' RBRACE COMMA DOT
 	;
 
@@ -50,13 +55,26 @@ equation:
 	| '\\begin{equation}' equation '\\end{equation}'
 ;
 
+
+cases_prefix:
+	'\\begin{cases}'
+	;
+
+cases_suffix:
+	'\\end{cases}'
+	;
+
+cases_body:
+	   equation+ 
+        |  expr* inequality  
+        |  variable expr conditional inequality LATEX_NEWLINE? 
+        |  int expr conditional inequality LATEX_NEWLINE?
+        |  expr+ conditional (DOT|COMMA)? LATEX_NEWLINE? 
+	;
+
 cases:
-	'\\begin{cases}' equation+ '\\end{cases}'
-        | '\\begin{cases}' expr* inequality '\\end{cases}' 
-        | '\\begin{cases}' (variable expr conditional inequality LATEX_NEWLINE?)+ '\\end{cases}'
-        | '\\begin{cases}' (int expr conditional inequality LATEX_NEWLINE?)+ '\\end{cases}'
-	
-;
+	cases_prefix cases_body+ cases_suffix;
+
 
 IGNORE:
 	('\\begin{verbatim}'
@@ -88,7 +106,7 @@ RBRACKET: ']' ;
 RPAREN: ')' ;
 SUBTRACT : '-' ;
 UNDERSCORE: '_';
-VARIABLE: 'x' | 'y' | 'z' | 'P' | 'r' |'j';
+VARIABLE: 'x' | 'y' | 'z' | 'P' | 'r' |'i'|'j'|'S'|'p'|'l'|'V'|'q'|'n';
 BANG: '!';
 POW: '^';
 
@@ -100,4 +118,11 @@ int :
 
 INT:   '0'|[1-9][0-9]*  ;        // match integers
 NEWLINE:'\r'? '\n' -> skip ;      // return newlines to parser (is end-statement signal)
-WS  :   [ \t]+ -> skip  ; // toss out whitespace
+
+constant:
+	'e'
+	| 'PI'
+	;
+
+
+WS  :   ([ \t]+|'\\,') -> skip  ; // toss out whitespace
