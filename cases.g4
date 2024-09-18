@@ -11,10 +11,10 @@ expr:
     |	expr MUL  expr   
     |   expr DIV  expr  
     |   expr ADD  expr  
-    |   expr SUBTRACT  expr   
-    |   LPAREN expr+ RPAREN
-    |   LBRACE expr+ RBRACE
-    |   LBRACKET expr+ RBRACKET    
+    |   expr SUB  expr   
+    |   L_PAREN expr+ R_PAREN
+    |   L_BRACE expr+ R_BRACE
+    |   L_BRACKET expr+ R_BRACKET    
     |   BAR variable BAR
     |   function BAR UNDERSCORE variable POW variable
     |   variable
@@ -24,7 +24,7 @@ expr:
     | conditional inequality 
     | '$' expr '$'
     | '\\[' expr '\\]'
-    | variable UNDERSCORE LBRACE expr RBRACE 
+    | variable UNDERSCORE L_BRACE expr R_BRACE 
     | factorial
 ;
 
@@ -41,11 +41,11 @@ relop
 	;
 
 conditional:
-	'\\text' LBRACE 'if' RBRACE
-	| '\\text' LBRACE 'if' expr 'is odd' RBRACE COMMA LATEX_NEWLINE
-	| '\\text' LBRACE 'if' expr 'is even' RBRACE COMMA LATEX_NEWLINE
-	| '\\text' LBRACE 'if' expr 'is odd' RBRACE COMMA DOT
-	| '\\text' LBRACE 'if' expr 'is even' RBRACE COMMA DOT
+	'\\text' L_BRACE 'if' R_BRACE
+	| '\\text' L_BRACE 'if' expr 'is odd' R_BRACE COMMA LATEX_NEWLINE
+	| '\\text' L_BRACE 'if' expr 'is even' R_BRACE COMMA LATEX_NEWLINE
+	| '\\text' L_BRACE 'if' expr 'is odd' R_BRACE COMMA DOT
+	| '\\text' L_BRACE 'if' expr 'is even' R_BRACE COMMA DOT
 	;
 
 equation:
@@ -97,21 +97,66 @@ variable:
 	| VARIABLE	
 ;
 
+
 ADD : '+'  ;
 BAR:	'|' ;
+CMD_BINOM: '\\binom';
+CMD_CDOT: '\\cdot';
+CMD_DBINOM: '\\dbinom';
+CMD_DIV: '\\div';
+CMD_MATHIT: '\\mathit';
+CMD_TBINOM: '\\tbinom';
+CMD_TIMES: '\\times';
+COLON: ':';
 COMMA: ',';
-DIV : '/' ;
+DIV: '/';
 DOT: '.';
 EQUALS : '=' |'&='; 
+FUNC_ARCCOS: '\\arccos';
+FUNC_ARCCOT: '\\arccot';
+FUNC_ARCCSC: '\\arccsc';
+FUNC_ARCOSH: '\\arcosh';
+FUNC_ARCSEC: '\\arcsec';
+FUNC_ARCSIN: '\\arcsin';
+FUNC_ARCTAN: '\\arctan';
+FUNC_ARSINH: '\\arsinh';
+FUNC_ARTANH: '\\artanh';
+FUNC_COS: '\\cos';
+FUNC_COSH: '\\cosh';
+FUNC_COT: '\\cot';
+FUNC_CSC: '\\csc';
+FUNC_EXP: '\\exp';
+FUNC_LG: '\\lg';
+FUNC_LIM: '\\lim';
+FUNC_LN: '\\ln';
+FUNC_LOG: '\\log';
+FUNC_PROD: '\\prod';
+FUNC_SEC: '\\sec';
+FUNC_SINH: '\\sinh';
+FUNC_SIN: '\\sin';
+FUNC_SQRT: '\\sqrt';
+FUNC_SUM: '\\sum';
+FUNC_TANH: '\\tanh';
+FUNC_TAN: '\\tan';
+L_ANGLE: '\\langle';
 LATEX_NEWLINE: '\\\\' '\\'*;
-LBRACE: '{' ;
-LBRACKET: '[' ;
-LPAREN: '(' ;
-MUL : '*' ; 
-RBRACE: '}' ;
-RBRACKET: ']' ;
-RPAREN: ')' ;
-SUBTRACT : '-' ;
+L_BAR: '\\left|';
+L_BRACE: '{';
+L_BRACE_LITERAL: '\\{';
+L_BRACKET: '[';
+L_CEIL: '\\lceil';
+L_FLOOR: '\\lfloor';
+L_PAREN: '(';
+MUL: '*';
+R_ANGLE: '\\rangle';
+R_BAR: '\\right|';
+R_BRACE: '}';
+R_BRACE_LITERAL: '\\}';
+R_BRACKET: ']';
+R_CEIL: '\\rceil';
+R_FLOOR: '\\rfloor';
+R_PAREN: ')';
+SUB: '-';
 UNDERSCORE: '_';
 VARIABLE: 'a' | 'b' |  'x' | 'y' | 'z' | 'P' | 'r' |'i'|'j'|'S'|'p'|'l'|'V'|'q'|'n';
 BANG: '!';
