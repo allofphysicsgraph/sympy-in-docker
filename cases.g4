@@ -16,6 +16,7 @@ expr:
     |   LBRACE expr+ RBRACE
     |   LBRACKET expr+ RBRACKET    
     |   BAR variable BAR
+    |   function BAR UNDERSCORE variable POW variable
     |   variable
     |   int 
     |  '& '
@@ -26,6 +27,7 @@ expr:
     | variable UNDERSCORE LBRACE expr RBRACE 
     | factorial
 ;
+
 
 
 inequality
@@ -84,6 +86,11 @@ IGNORE:
 ) -> skip	
 ;
 
+function:
+	'f(x)'
+	;
+
+
 variable:
      int VARIABLE
  	| ('-'|'+') VARIABLE
@@ -106,7 +113,7 @@ RBRACKET: ']' ;
 RPAREN: ')' ;
 SUBTRACT : '-' ;
 UNDERSCORE: '_';
-VARIABLE: 'x' | 'y' | 'z' | 'P' | 'r' |'i'|'j'|'S'|'p'|'l'|'V'|'q'|'n';
+VARIABLE: 'a' | 'b' |  'x' | 'y' | 'z' | 'P' | 'r' |'i'|'j'|'S'|'p'|'l'|'V'|'q'|'n';
 BANG: '!';
 POW: '^';
 
